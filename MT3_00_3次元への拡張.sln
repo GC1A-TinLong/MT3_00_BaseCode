@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34728.123
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MT3_00_3次元への拡張", "MT3_00_3次元への拡張.vcxproj", "{601513BD-C7BD-4CC2-A637-A8C7B941438C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{601513BD-C7BD-4CC2-A637-A8C7B941438C}.Debug|x64.ActiveCfg = Debug|x64
+		{601513BD-C7BD-4CC2-A637-A8C7B941438C}.Debug|x64.Build.0 = Debug|x64
+		{601513BD-C7BD-4CC2-A637-A8C7B941438C}.Release|x64.ActiveCfg = Release|x64
+		{601513BD-C7BD-4CC2-A637-A8C7B941438C}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BA258A04-B86C-417A-865E-CB83178B41B1}
+	EndGlobalSection
+EndGlobal

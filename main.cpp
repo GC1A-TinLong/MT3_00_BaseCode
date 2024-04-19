@@ -12,7 +12,11 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	Vector3 scale{ 1.2f,0.79f,-2.1f };
 	Vector3 rotate{ 0.4f,1.43f,-0.8f };
 	Vector3 translate{ 2.7f,-4.15f,1.57f };
-	Matrix4x4 worldMatrix;
+	Matrix4x4 rotateMatrix_X = MakeRotateXMatrix(rotate.x);
+	Matrix4x4 rotateMatrix_Y = MakeRotateYMatrix(rotate.y);
+	Matrix4x4 rotateMatrix_Z = MakeRotateZMatrix(rotate.z);
+	Matrix4x4 rotateMatrix_XYZ = rotateMatrix_X * rotateMatrix_Y * rotateMatrix_Z;
+	Matrix4x4 worldMatrix = MakeAffineMatrix(scale, rotateMatrix_XYZ, translate);
 
 	// キー入力結果を受け取る箱
 	char keys[256] = { 0 };
@@ -39,7 +43,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		/// ↓描画処理ここから
 		///
 
-		
+		MatrixScreenPrintf(0, 0, worldMatrix, "WorldMatrix:");
 
 		///
 		/// ↑描画処理ここまで

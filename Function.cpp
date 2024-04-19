@@ -204,7 +204,7 @@ Vector3 Transform(const Vector3& vector, const Matrix4x4& matrix)
 	return result;
 }
 
-Matrix4x4 MakeRotateXMatrix(float& radian)
+Matrix4x4 MakeRotateXMatrix(const float& radian)
 {
 	Matrix4x4 result{};
 	result.m[0][0] = 1.0f;
@@ -215,7 +215,7 @@ Matrix4x4 MakeRotateXMatrix(float& radian)
 	result.m[3][3] = 1.0f;
 	return result;
 }
-Matrix4x4 MakeRotateYMatrix(float& radian)
+Matrix4x4 MakeRotateYMatrix(const float& radian)
 {
 	Matrix4x4 result{};
 	result.m[0][0] = cosf(radian);
@@ -226,7 +226,7 @@ Matrix4x4 MakeRotateYMatrix(float& radian)
 	result.m[3][3] = 1.0f;
 	return result;
 }
-Matrix4x4 MakeRotateZMatrix(float& radian)
+Matrix4x4 MakeRotateZMatrix(const float& radian)
 {
 	Matrix4x4 result{};
 	result.m[0][0] = cosf(radian);
@@ -238,17 +238,21 @@ Matrix4x4 MakeRotateZMatrix(float& radian)
 	return result;
 }
 
-Matrix4x4 MakeAffineMatrix(const Vector3& scale, const Matrix4x4& rotate, const Vector3& translate)
+Matrix4x4 MakeAffineMatrix(const Vector3& scale, const Vector3& rotate, const Vector3& translate)
 {
 	Matrix4x4 result = MakeTranslateMatrix(translate);
-	result.m[0][0] = scale.x * rotate.m[0][0];
-	result.m[0][1] = scale.x * rotate.m[0][1];
-	result.m[0][2] = scale.x * rotate.m[0][2];
-	result.m[1][0] = scale.y * rotate.m[1][0];
-	result.m[1][1] = scale.y * rotate.m[1][1];
-	result.m[1][2] = scale.y * rotate.m[1][2];
-	result.m[2][0] = scale.z * rotate.m[2][0];
-	result.m[2][1] = scale.z * rotate.m[2][1];
-	result.m[2][2] = scale.z * rotate.m[2][2];
+	Matrix4x4 rotateXmatrix = MakeRotateXMatrix(rotate.x);
+	Matrix4x4 rotateYmatrix = MakeRotateYMatrix(rotate.y);
+	Matrix4x4 rotateZmatrix = MakeRotateZMatrix(rotate.z);
+	Matrix4x4 rotateXYZmatrix = rotateXmatrix * rotateYmatrix * rotateZmatrix;
+	result.m[0][0] = scale.x * rotateXYZmatrix.m[0][0];
+	result.m[0][1] = scale.x * rotateXYZmatrix.m[0][1];
+	result.m[0][2] = scale.x * rotateXYZmatrix.m[0][2];
+	result.m[1][0] = scale.y * rotateXYZmatrix.m[1][0];
+	result.m[1][1] = scale.y * rotateXYZmatrix.m[1][1];
+	result.m[1][2] = scale.y * rotateXYZmatrix.m[1][2];
+	result.m[2][0] = scale.z * rotateXYZmatrix.m[2][0];
+	result.m[2][1] = scale.z * rotateXYZmatrix.m[2][1];
+	result.m[2][2] = scale.z * rotateXYZmatrix.m[2][2];
 	return result;
 }

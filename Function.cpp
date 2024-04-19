@@ -237,3 +237,10 @@ Matrix4x4 MakeRotateZMatrix(float& radian)
 	result.m[3][3] = 1.0f;
 	return result;
 }
+
+Matrix4x4 MakeAffineMatrix(const Vector3& scale, const Vector3& rotate, const Vector3& translate)
+{
+	Matrix4x4 result{};
+	result.m[0][0]=scale.x*rotate.x
+
+}
